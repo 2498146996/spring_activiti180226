@@ -18,7 +18,8 @@ function initActReModelGrid() {
 	        	, formatter: function(value, row, index) {
 	        		return '<a title="修改" class="easyui-tooltip"><img onclick="editBtnClick('+index+')" alt="修改" src="jquery/easyui/themes/icons/pencil.png"/></a>&nbsp;' 
 	        			+ '<a title="删除" class="easyui-tooltip"><img onclick="removeBtnClick('+index+')" alt="删除" src="jquery/easyui/themes/icons/edit_remove.png"/></a>&nbsp;'
-	        			+ '<a title="设置" class="easyui-tooltip"><img onclick="moreBtnClick('+index+')" alt="设置" src="jquery/easyui/themes/icons/more.png"/></a>';
+	        			+ '<a title="设置" class="easyui-tooltip"><img onclick="moreBtnClick('+index+')" alt="设置" src="jquery/easyui/themes/icons/more.png"/></a>&nbsp;'
+		        		+ '<a title="部署" class="easyui-tooltip"><img onclick="deployBtnClick('+index+')" alt="部署" src="jquery/easyui/themes/icons/other/icon_upload.png" height="16" width="16"/></a>';
 	        	}
 	        }, 
 	        {field:'id', title:'ID_'}, 
@@ -39,7 +40,8 @@ function initActReModelGrid() {
 	    	text: '新增', 
 			iconCls: 'icon-add', 
 			handler: addActReModelBtn
-		}]
+		}],
+		fitColumns: true
 	});
 }
 function editBtnClick(index) {
@@ -48,7 +50,7 @@ function editBtnClick(index) {
 function removeBtnClick(index) {
 	var row = $('#actReModelGrid').datagrid('getRows')[index];
 	$.ajax({
-		type: 'post', 
+		type: 'POST', 
 		url: 'com/zqy/activitiManager/demo1/ctl/ActivitiManagerCTL/removeActReModel', 
 		data: {modelId: row.id}, 
 		success: function(data) {
@@ -59,6 +61,18 @@ function removeBtnClick(index) {
 function moreBtnClick(index) {
 	var row = $('#actReModelGrid').datagrid('getRows')[index];
 	location.href = baseUrl + "/activiti/modeler.html?modelId=" + row.id;
+}
+function deployBtnClick(index) {
+	var row = $('#actReModelGrid').datagrid('getRows')[index];
+	$.ajax({
+		type: 'POST', 
+		url: 'com/zqy/activitiManager/demo1/ctl/ActivitiManagerCTL/deployActReModel', 
+		data: {modelId: row.id}, 
+		success: function(data) {
+			$('#actReModelGrid').datagrid('reload');
+			$.messager.alert('提示','部署完成！','info');
+		}
+	});
 }
 /**
  * 初始化列表addActReModelDialog
@@ -92,11 +106,14 @@ function addActReModelBtn() {
 	$('#addActReModelDialog').dialog('open');
 }
 function saveActReModelBtn() {
+	var id = $("#id").textbox('getValue');
+	var key = $("#key").textbox('getValue');
 	var name = $("#name").textbox('getValue');
+	var description = $("#description").textbox('getValue');
 	$.ajax({
-		type: 'post', 
+		type: 'POST', 
 		url: 'com/zqy/activitiManager/demo1/ctl/ActivitiManagerCTL/saveActReModel', 
-		data: {name: name}, 
+		data: {id:id, key:key, name:name, description:description}, 
 		success: function(data) {
 			$('#actReModelGrid').datagrid('reload');
 		}

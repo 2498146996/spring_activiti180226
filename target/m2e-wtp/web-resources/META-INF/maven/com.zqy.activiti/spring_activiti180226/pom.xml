@@ -119,6 +119,11 @@
     	<artifactId>log4j-web</artifactId>
     	<version>${log4j.version}</version>
     </dependency>
+    <dependency>
+    	<groupId>redis.clients</groupId>
+    	<artifactId>jedis</artifactId>
+    	<version>${jedis.version}</version>
+    </dependency>
   </dependencies>
   <build>
     <finalName>spring_activiti180226</finalName>
@@ -136,5 +141,6 @@
   	<h2database.version>1.4.197</h2database.version>
   	<log4j.version>2.3</log4j.version>
   	<slf4j.version>1.7.25</slf4j.version>
+  	<jedis.version>2.9.0</jedis.version>
   </properties>
 </project>

@@ -15,8 +15,10 @@ var basePath = '${pageContext.request.contextPath}';
 <body>
 <table id="actReModelGrid"></table>
 <div id="addActReModelDialog" align="center">
-	<input id="id" class="easyui-textbox" data-options="label:'ID_:'" style="width:200px"></br>
-	<input id="name" class="easyui-textbox" data-options="label:'NAME_:'" style="width:200px">
+	<input id="id" class="easyui-textbox" data-options="label:'ID_:'" style="width:200px; display: none;"></br>
+	<input id="key" class="easyui-textbox" data-options="label:'KEY_:'" style="width:200px"></br>
+	<input id="name" class="easyui-textbox" data-options="label:'NAME_:'" style="width:200px"></br>
+	<input id="description" class="easyui-textbox" data-options="label:'DESCRIPTION_:'" style="width:200px"></br>
 </div>
 </body>
 </html>
