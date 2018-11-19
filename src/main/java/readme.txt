@@ -1,1 +1,1 @@
-Creating a new branch is quick AND simple mas.
+Creating a new branch 2.
